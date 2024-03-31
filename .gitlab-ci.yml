@@ -16,11 +16,6 @@ test:
     - go fmt $(go list ./... | grep -v /vendor/)
     - go vet $(go list ./... | grep -v /vendor/)
     - go test -race $(go list ./... | grep -v /vendor/)
-  artifacts:
-    name: pages
-    when: always
-    paths:
-      - badges/
 
 publish:
   stage: 🐳publish
@@ -37,17 +32,9 @@ publish:
     - docker
   only:
     - main
-  artifacts:
-    name: pages
-    when: always
-    paths:
-      - badges/
+
 deploy:
   stage: 📦deploy
   script: echo "Define your deployment script!"
   environment: production
-  artifacts:
-    name: pages
-    when: always
-    paths:
-      - badges/
+
