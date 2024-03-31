@@ -17,8 +17,11 @@ test:
     - go vet $(go list ./... | grep -v /vendor/)
     - go test -race $(go list ./... | grep -v /vendor/)
   artifacts:
+    name: pages
+    when: always
     paths:
-      - public/🧪tests.svg
+      - badges/
+
 publish:
   stage: 🐳publish
   image: docker:20.10.16-dind
@@ -35,12 +38,16 @@ publish:
   only:
     - main
   artifacts:
+    name: pages
+    when: always
     paths:
-      - public/🐳publish.svg
+      - badges/
 deploy:
   stage: 📦deploy
   script: echo "Define your deployment script!"
   environment: production
   artifacts:
+    name: pages
+    when: always
     paths:
-      - 📦deploy.svg
+      - badges/
