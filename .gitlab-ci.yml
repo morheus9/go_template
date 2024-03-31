@@ -30,7 +30,7 @@ publish:
     - docker push $GO_EXAMPLE_LATEST
     - docker push $GO_EXAMPLE_IMAGE
   tags:
-    - gitlab-org
+    - docker
   only:
     - main
 
