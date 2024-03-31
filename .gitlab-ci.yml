@@ -4,7 +4,6 @@ stages:
   - 🐳publish
   - 🧪tests
   - 📦deploy
-  - pages
 
 variables:
   DOCKER_TLS_CERTDIR: ""
@@ -45,11 +44,3 @@ deploy:
   artifacts:
     paths:
       - public/📦deploy.svg
-
-pages:
-  stage: pages
-  artifacts:
-    paths:
-      - public
-  only:
-    - master
