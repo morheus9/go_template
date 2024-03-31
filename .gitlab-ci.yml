@@ -19,9 +19,9 @@ test:
 
 publish:
   stage: 🐳publish
-  image: docker:20.10.16-dind
+  image: docker:dind
   services:
-    - docker:20.10.16-dind
+    - docker:dind
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin
   script:
