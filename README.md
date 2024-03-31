@@ -3,7 +3,6 @@
 
 Status of last Deployment:<br>
 
-![pipeline status](https://gitlab.com/morheus9/go_example/badges/main/pipeline.svg)
-![pipeline status1](https://gitlab.com/morheus9/go_example/badges/deploy.svg)
 
-(https://gitlab.com/morheus9/go_example/badges/deploy.svg)
+
+![pipeline status1](https://gitlab.com/morheus9/go_example//builds/artifacts/default/browse?job=deploy)
