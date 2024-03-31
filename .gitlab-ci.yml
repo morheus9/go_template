@@ -20,7 +20,7 @@ test:
     paths:
       - public/🧪tests.svg
 publish:
-  stage: 🐳publish   
+  stage: 🐳publish
   image: docker:20.10.16-dind
   services:
     - docker:20.10.16-dind
