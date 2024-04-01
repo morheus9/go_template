@@ -5,7 +5,7 @@ import (
 	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/morheus9/go_example/find_data"
+	"github.com/morheus9/go_example/find_data/v5"
 )
 
 func main() {
