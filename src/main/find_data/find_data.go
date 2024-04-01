@@ -1,7 +1,6 @@
 package find_data
 
-import "fmt"
-
-func Find_data() {
-	fmt.Println("Hello, World!")
+func Find_data() int {
+	const F = 1 + 2
+	return F
 }

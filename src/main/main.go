@@ -3,13 +3,13 @@ package main
 import (
 	"log"
 	"os"
+	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/morheus9/go_example/find_data/v5"
+	"github.com/morheus9/go_example/src/main/find_data"
 )
 
 func main() {
-	find_data.Find_data()
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
 	if err != nil {
 		log.Panic(err)
@@ -40,7 +40,7 @@ func main() {
 		// Extract the command from the Message.
 		switch update.Message.Command() {
 		case "check":
-			msg.Text = "check"
+			msg.Text = strconv.Itoa(find_data.Find_data())
 		case "check2":
 			msg.Text = "check2)"
 		case "status":
