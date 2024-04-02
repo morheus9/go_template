@@ -1,4 +1,4 @@
-# Go k8s
+# Golang base bot example
 ## 
 
 Status of last Deployment:<br>
