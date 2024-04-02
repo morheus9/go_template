@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/morheus9/go_example/src/main/find_data"
+	"gitlab.com/morheus9/go_example/src/main/find_data"
 )
 
 func main() {
