@@ -1,6 +1,9 @@
-# Golang base bot example
+# Golang trading bot
 ## 
 
 Status of last Deployment:<br>
 
-![pipeline status](https://gitlab.com/morheus9/go_example/badges/main/pipeline.svg)
+
+
+[![Golint](https://github.com/morheus9/fastapi_postgres_crud/actions/workflows/ruff.yml/badge.svg)](https://github.com/morheus9/fastapi_postgres_crud/actions/workflows/ruff.yml)
+[![DockerCI](https://github.com/morheus9/fastapi_postgres_crud/actions/workflows/push_dockerfile.yml/badge.svg?branch=master)](https://github.com/morheus9/fastapi_postgres_crud/actions/workflows/push_dockerfile.yml)
