@@ -1,4 +1,4 @@
-module gitlab.com/morheus9/go_example
+module github.com/morheus9/tg_bot_trading
 
 go 1.22.1
 
