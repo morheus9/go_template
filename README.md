@@ -8,4 +8,3 @@ Status of last Deployment:<br>
 [![CodeQL](https://github.com/morheus9/tg_bot_trading/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/morheus9/tg_bot_trading/actions/workflows/codeql.yml)
 [![DockerCI:](https://github.com/morheus9/tg_bot_trading/actions/workflows/docker-ci.yml/badge.svg?branch=main)](https://github.com/morheus9/tg_bot_trading/actions/workflows/docker-ci.yml)
 
-[![CI](https://github.com/morheus9/tg_bot_trading/actions/workflows/CI.yml/badge.svg)](https://github.com/morheus9/tg_bot_trading/actions/workflows/CI.yml)
