@@ -1,4 +1,4 @@
-# Golang telegram speech to text bot
+# Golang telegram speech to text (STT) bot
 ## 
 
 1. Clone and run whisper
