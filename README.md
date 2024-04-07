@@ -14,13 +14,15 @@ git clone https://github.com/ggerganov/whisper.cpp.git && cd whisper.cpp
 make
 ```
 3. Download models, there are different models available:
-| Model  | Disk    |  Memory usage  |
-| ------ | ------- |  ------------- |
-| tiny   | 75 MiB  |     ~273 MB    |
-| base   | 142 MiB |     ~388 MB    |
-| small  | 466 MiB |     ~852 MB    |
-| medium | 1.5 GiB |     ~2.1 GB    |
-| large  | 2.9 GiB |     ~3.9 GB    |
+
+| Model  | Disk    | Mem     |
+| ------ | ------- | ------- |
+| tiny   | 75 MiB  | ~273 MB |
+| base   | 142 MiB | ~388 MB |
+| small  | 466 MiB | ~852 MB |
+| medium | 1.5 GiB | ~2.1 GB |
+| large  | 2.9 GiB | ~3.9 GB |
+
 More info: https://github.com/ggerganov/whisper.cpp/blob/master/README.md
 # To download some models do:
 ```
