@@ -24,21 +24,21 @@ make
 | large  | 2.9 GiB | ~3.9 GB |
 
 More info: https://github.com/ggerganov/whisper.cpp/blob/master/README.md
-# To download some models do:
+To download some models do:
 ```
 ./models/download-ggml-model.sh large-v3
 ```
 4. If you want to - whisper.cpp supports integer quantization of the Whisper ggml models. Quantized models require less memory and disk space and depending on the hardware can be processed more efficiently.
-# for creating a quantized model do:
+for creating a quantized model do:
 ```
 make quantize
 ./quantize models/ggml-large-v3.bin models/ggml-large-v3-q5_0.bin q5_0
 ```
-# You can also download samples:
+You can also download samples:
 ```
 make samples
 ```
-#  You can check your whisper, specifying the quantized model file:
+You can check your whisper, specifying the quantized model file:
 ```
 ./main -m models/ggml-base.en-q5_0.bin ./samples/gb0.wav
 ```
@@ -47,18 +47,18 @@ make samples
 $ which ffmpeg
 /usr/bin/ffmpeg
 ```
-5. Add ENVs to your system. Path to your model and your telegram bot token. 
+6. Add ENVs to your system. Path to your model and your telegram bot token. 
 More (https://core.telegram.org/bots/tutorial#obtain-your-bot-token)
 ```
 export TELEGRAM_APITOKEN=<your bot token here>
 export MODELPATH=whisper.cpp/models/ggml-tiny.en.bin
 ```
-6. Build bot:
+7. Build bot:
 ```
 go get
 C_INCLUDE_PATH=/app/whisper.cpp/ LIBRARY_PATH=/app/whisper.cpp/ go build -o whisper_bot
 ```
-7. Start bot:
+8. Start bot:
 ```
 ./whisper_bot
 ```
