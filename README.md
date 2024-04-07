@@ -1,5 +1,19 @@
-# Golang trading bot
+# Golang telegram speech to text bot
 ## 
+
+1. Clone and run whisper
+```
+git clone https://github.com/ggerganov/whisper.cpp.git && cd whisper.cpp
+```
+2. Make it
+```
+make
+```
+3. Download models
+```
+./models/download-ggml-model.sh large-v3
+```
+
 
 Status of last Deployment:<br>
 
