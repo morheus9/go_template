@@ -1,55 +1,106 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
-	"strconv"
 
+	"github.com/cavaliergopher/grab/v3"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/morheus9/tg_bot_trading/src/main/find_data"
+	ffmpeg "github.com/u2takey/ffmpeg-go"
 )
 
 func main() {
-	bot, err := tgbotapi.NewBotAPI(os.Getenv("BOT_TOKEN"))
-	if err != nil {
-		log.Panic(err)
+	apiToken, ok := os.LookupEnv("TELEGRAM_APITOKEN")
+	if !ok {
+		panic("No TELEGRAM_APITOKEN environment variable found.")
 	}
 
+	bot, err := tgbotapi.NewBotAPI(apiToken)
+	if err != nil {
+		panic(err)
+	}
+
+	whisperModel := GetModel()
+	defer whisperModel.Close()
+
 	bot.Debug = true
+	// Create a new UpdateConfig struct with an offset of 0. Offsets are used
+	// to make sure Telegram knows we've handled previous values and we don't
+	// need them repeated.
+	updateConfig := tgbotapi.NewUpdate(0)
 
-	log.Printf("Authorized on account %s", bot.Self.UserName)
+	// Tell Telegram we should wait up to 30 seconds on each request for an
+	// update. This way we can get information just as quickly as making many
+	// frequent requests without having to send nearly as many.
+	updateConfig.Timeout = 30
 
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
+	// Start polling Telegram for updates.
+	updates := bot.GetUpdatesChan(updateConfig)
 
-	updates := bot.GetUpdatesChan(u)
-
+	// Let's go through each update that we're getting from Telegram.
 	for update := range updates {
-		if update.Message == nil { // ignore any non-Message updates
+		// Discard if not message.
+		if update.Message == nil {
 			continue
 		}
 
-		if !update.Message.IsCommand() { // ignore any non-command Messages
+		// Discard if not voice message.
+		if update.Message.Voice == nil {
 			continue
 		}
 
-		// Create a new MessageConfig. We don't have text yet,
-		// so we leave it empty.
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-
-		// Extract the command from the Message.
-		switch update.Message.Command() {
-		case "check":
-			msg.Text = strconv.Itoa(find_data.Find_data())
-		case "check2":
-			msg.Text = "check2)"
-		case "status":
-			msg.Text = "I'm ok."
-		default:
-			msg.Text = "I don't know that command"
+		file, err := bot.GetFileDirectURL(update.Message.Voice.FileID)
+		if err != nil {
+			log.Fatal(err)
 		}
-		if _, err := bot.Send(msg); err != nil {
-			log.Panic(err)
+
+		//TODO: Don't save to a temporary file, replace with a pipe to ffmpeg
+		resp, err := grab.Get("tmp/", file)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("Download saved to", resp.Filename)
+
+		voiceMsgFilename := resp.Filename
+		err = ffmpeg.Input(voiceMsgFilename).
+			Output("tmp/tmp.wav",
+				ffmpeg.KwArgs{"acodec": "pcm_s16le", "ac": "1", "ar": "16000"}).
+			OverWriteOutput().ErrorToStdOut().Run()
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		samples, err := GetSamplesFromFilePath("tmp/tmp.wav")
+		if err != nil {
+			log.Printf("Unfortunately this happened: %v", err)
+			continue
+		}
+
+		recognizedText, err := ProcessSamples(whisperModel, samples)
+		if err != nil {
+			log.Printf("Error while processing samples from wave file: %v", err)
+			continue
+		}
+
+		// Now that we know we've gotten a new message, we can construct a
+		// reply! We'll take the Chat ID and Text from the incoming message
+		// and use it to create a new message.
+		if recognizedText != "" {
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, recognizedText)
+			// We'll also say that this message is a reply to the previous message.
+			// For any other specifications than Chat ID or Text, you'll need to
+			// set fields on the `MessageConfig`.
+			msg.ReplyToMessageID = update.Message.MessageID
+
+			// Okay, we're sending our message off! We don't care about the message
+			// we just sent, so we'll discard it.
+			if _, err := bot.Send(msg); err != nil {
+				log.Printf("Error sending message: %v", err) //TODO: Handle and retry?
+			}
+		} else {
+			log.Println("Nothing recognized, nothing to send.")
 		}
 	}
 }

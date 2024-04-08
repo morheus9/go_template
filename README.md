@@ -42,10 +42,12 @@ You can check your whisper, specifying the quantized model file:
 ```
 ./main -m models/ggml-base.en-q5_0.bin ./samples/gb0.wav
 ```
-5. Install ffmpeg. You can check this by:
+5. Install ffmpeg and golang. You can check this by:
 ```
-$ which ffmpeg
+$ which ffmpeg && go version
 /usr/bin/ffmpeg
+go version go1.22.2 linux/amd64
+
 ```
 6. Add ENVs to your system. Path to your model and your telegram bot token. 
 More (https://core.telegram.org/bots/tutorial#obtain-your-bot-token)
