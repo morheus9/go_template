@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	apiToken, ok := os.LookupEnv("TELEGRAM_APITOKEN")
+	apiToken, ok := os.LookupEnv("BOT_TOKEN")
 	if !ok {
 		panic("No TELEGRAM_APITOKEN environment variable found.")
 	}

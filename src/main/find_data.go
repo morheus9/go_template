@@ -1,4 +1,4 @@
-package transcription_whisper
+package main
 
 import (
 	"fmt"
