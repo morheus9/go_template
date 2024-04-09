@@ -5,8 +5,8 @@ import (
 	"os"
 	"strconv"
 
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/morheus9/tg_bot_trading/src/main/find_data"
+	tgbotapi "github.com/go-grpc/telegram-bot-api/v5"
+	"github.com/morheus9/go-grpc/src/main/find_data"
 )
 
 func main() {
