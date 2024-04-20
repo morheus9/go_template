@@ -9,6 +9,6 @@ import (
 
 func main() {
 
-	strconv.Itoa(find_data.Find_data())
-	fmt.Printf("F")
+	var C = strconv.Itoa(find_data.Find_data())
+	fmt.Println(C)
 }
