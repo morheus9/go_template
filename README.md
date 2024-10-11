@@ -1,4 +1,4 @@
-# Golang telegram speech to text bot
+# Golang template 
 ## 
 [![GoLint](https://github.com/morheus9/tg_bot_trading/actions/workflows/go_lint.yml/badge.svg?branch=main)](https://github.com/morheus9/tg_bot_trading/actions/workflows/go_lint.yml)
 [![Gotest](https://github.com/morheus9/tg_bot_trading/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/morheus9/tg_bot_trading/actions/workflows/tests.yml)
